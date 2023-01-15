@@ -8,12 +8,10 @@ class Server {
 
     constructor(){
         this.app=express();
-        this.port = process.env.PORT || 8080;
+        this.port = process.env.PORT || 80;
         this.userPath = '/api/users'
-
         // Middlewares
         this.middlewares();
-
         // Routes 
         this.routes();
     }
@@ -32,7 +30,7 @@ class Server {
     }
 
     lister(){
-        this.app.listen(this.port, ()=>{
+        this.app.listen(this.port, process.env.IP, ()=>{
             console.log("Aplication of nodeJs",this.port);
         });
     }

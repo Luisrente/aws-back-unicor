@@ -31,7 +31,7 @@ class Server {
 
     lister(){
         this.app.listen(this.port, process.env.IP, ()=>{
-            console.log("Aplication of nodeJs",this.port);
+            console.log("Aplication of nodeJs",this.port,process.env.IP );
         });
     }
 

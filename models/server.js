@@ -9,6 +9,7 @@ class Server {
     constructor(){
         this.app=express();
         this.port = process.env.PORT || 80;
+        this.ipr = process.env.IP;
         this.userPath = '/api/users'
         // Middlewares
         this.middlewares();
@@ -25,14 +26,21 @@ class Server {
 
     routes(){
         this.app.use(this.userPath , require('../routes/user'))
-
-
     }
 
     lister(){
-        this.app.listen(this.port, process.env.IP, ()=>{
-            console.log("Aplication of nodeJs",this.port,process.env.IP );
-        });
+        if(process.env.NODE_ENV =='development'){
+            this.app.listen(this.port,()=>{
+                console.log("Aplication of nodeJs",this.port);
+            });
+        }
+
+        if(process.env.NODE_ENV =='production'){
+            this.app.listen(this.port,this.ipr,()=>{
+                console.log("Aplication of nodeJs",this.port);
+            });
+        }
+    
     }
 
 }
